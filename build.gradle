@@ -1,0 +1,5 @@
+// Root build file - kept minimal because repositories are configured in settings.gradle
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

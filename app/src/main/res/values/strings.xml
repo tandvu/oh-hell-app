@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Oh Hell Scorer</string>
+    <string name="add_player">Add Player</string>
+    <string name="player_name">Player Name</string>
+    <string name="start_game">Start Game</string>
+    <string name="new_game">New Game</string>
+    <string name="players">Players</string>
+    <string name="round">Round</string>
+    <string name="bid">Bid</string>
+    <string name="tricks">Tricks</string>
+    <string name="score">Score</string>
+    <string name="total_score">Total Score</string>
+    <string name="enter_bid">Enter Bid</string>
+    <string name="enter_tricks">Enter Tricks</string>
+    <string name="next_round">Next Round</string>
+    <string name="game_over">Game Over!</string>
+    <string name="winner">Winner: %s</string>
+    <string name="minimum_2_players">Please add at least 2 players</string>
+    <string name="enter_player_name">Please enter a player name</string>
+    <string name="player_exists">Player already exists</string>
+    <string name="cards_dealt">Cards: %d</string>
+    <string name="total_bids">Total Bids: %d</string>
+    <string name="made_bid">Made bid!</string>
+    <string name="missed_bid">Missed bid</string>
+</resources>
