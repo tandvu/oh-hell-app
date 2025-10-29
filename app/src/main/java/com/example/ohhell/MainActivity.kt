@@ -21,10 +21,12 @@ class MainActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityMainBinding
     private val gameState = GameState()
+    // Names loaded only from res/raw/player_names.txt; we will not persist user-entered names.
     private lateinit var savedPlayerNames: MutableSet<String>
     private lateinit var autoCompleteAdapter: ArrayAdapter<String>
     private lateinit var seatAdapters: MutableList<ArrayAdapter<String>>
     private lateinit var seats: List<AutoCompleteTextView>
+    private lateinit var seatRows: List<View>
     // Track selected raw names per seat (null = empty)
     private lateinit var selectedNames: MutableList<String?>
     
@@ -41,36 +43,24 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun loadSavedPlayerNames() {
+        // Only load from the raw resource list. Do not read SharedPreferences.
         savedPlayerNames = mutableSetOf()
-        
-        // Load from raw resource file
         try {
             val inputStream = resources.openRawResource(R.raw.player_names)
             inputStream.bufferedReader().useLines { lines ->
                 lines.forEach { line ->
                     val name = line.trim()
-                    if (name.isNotEmpty()) {
-                        savedPlayerNames.add(name)
-                    }
+                    if (name.isNotEmpty()) savedPlayerNames.add(name)
                 }
             }
         } catch (e: Exception) {
-            // File doesn't exist or can't be read, that's okay
-        }
-        
-        // Also load from SharedPreferences (for names added in the app)
-        val prefs = getSharedPreferences("OhHellPrefs", Context.MODE_PRIVATE)
-        val savedPrefsNames = prefs.getStringSet("player_names", mutableSetOf())
-        if (savedPrefsNames != null) {
-            savedPlayerNames.addAll(savedPrefsNames)
+            // If the resource is missing or unreadable, leave the set empty.
         }
     }
     
     private fun savePlayerName(name: String) {
-        savedPlayerNames.add(name)
-        val prefs = getSharedPreferences("OhHellPrefs", Context.MODE_PRIVATE)
-        prefs.edit().putStringSet("player_names", savedPlayerNames).apply()
-        updateAutoCompleteAdapter()
+        // Intentionally left blank: we do not persist names between sessions per user request.
+        // This is kept as a no-op so existing call-sites don't need to change.
     }
     
     private fun setupAutoComplete() {
@@ -86,6 +76,17 @@ class MainActivity : AppCompatActivity() {
             binding.seat7,
             binding.seat8,
         )
+        // Row containers corresponding to each seat (label + input). These IDs were added to the layout.
+        seatRows = listOf(
+            binding.rowSeat1,
+            binding.rowSeat2,
+            binding.rowSeat3,
+            binding.rowSeat4,
+            binding.rowSeat5,
+            binding.rowSeat6,
+            binding.rowSeat7,
+            binding.rowSeat8,
+        )
         // Create adapters and initialize selection state
         seatAdapters = mutableListOf()
         selectedNames = MutableList(seats.size) { null }
@@ -94,20 +95,20 @@ class MainActivity : AppCompatActivity() {
             seatAdapters.add(adapter)
             seat.setAdapter(adapter)
             seat.threshold = 1
-            // At start only the first seat's parent (TextInputLayout) is visible
-            val parentView = seat.parent as? View
-            parentView?.visibility = if (index == 0) View.VISIBLE else View.GONE
+            // At start only the first seat's row (LinearLayout containing label + input) is visible
+            seatRows.getOrNull(index)?.visibility = if (index == 0) View.VISIBLE else View.GONE
         }
     }
 
     // Build a per-seat adapter where items already selected in other seats are shown but disabled
     private fun buildAdapterForSeat(seatIndex: Int): ArrayAdapter<String> {
-        val names = (savedPlayerNames.toList().sorted() + selectedNames.filterNotNull()).distinct()
+    // Adapter items come only from the raw resource list (no persisted or user-saved names).
+    val names = savedPlayerNames.toList().sorted()
         val display = ArrayList<String>()
         val enabled = ArrayList<Boolean>()
 
         names.forEach { name ->
-            val at = selectedNames.indexOf(name)
+            val at = selectedNames.indexOfFirst { it != null && it.equals(name, ignoreCase = true) }
             if (at >= 0 && at != seatIndex) {
                 display.add("$name (seat ${at + 1})")
                 enabled.add(false)
@@ -191,8 +192,8 @@ class MainActivity : AppCompatActivity() {
                         val displayName = s?.toString()?.trim() ?: ""
                         if (displayName.isNotEmpty()) {
                             // Prevent duplicate names across seats
-                            val usedAt = selectedNames.indexOf(displayName)
-                            if (usedAt >= 0 && usedAt != index) {
+                            val usedAt = selectedNames.indexOfFirst { it != null && it.equals(displayName, ignoreCase = true) }
+                                if (usedAt >= 0 && usedAt != index) {
                                 Toast.makeText(this@MainActivity, "Name already used: $displayName", Toast.LENGTH_SHORT).show()
                                 // revert the change
                                 seat.removeTextChangedListener(this)
@@ -202,19 +203,15 @@ class MainActivity : AppCompatActivity() {
                             }
                             selectedNames[index] = displayName
                             savePlayerName(displayName)
-                            // reveal next seat (do not auto-focus)
-                            seats.getOrNull(index + 1)?.let { next ->
-                                val parentView = next.parent as? View
-                                parentView?.visibility = View.VISIBLE
-                            }
+                                // reveal next seat row (do not auto-focus)
+                                seatRows.getOrNull(index + 1)?.visibility = View.VISIBLE
                         } else {
                             // If this seat was cleared, clear selection and hide/clear all following seats.
                             selectedNames[index] = null
                             for (i in index + 1 until seats.size) {
                                 val following = seats[i]
                                 following.setText("")
-                                val parentView = following.parent as? View
-                                parentView?.visibility = View.GONE
+                                seatRows.getOrNull(i)?.visibility = View.GONE
                             }
                         }
                     // refresh adapters to show disabled items correctly
@@ -232,7 +229,7 @@ class MainActivity : AppCompatActivity() {
                 val pickedRaw = pickedDisplay.replace(Regex("\\s*\\(seat \\d+\\)\\s*$"), "").trim()
 
                 // If the picked item is already used by another seat, prevent selection
-                val alreadyAt = selectedNames.indexOf(pickedRaw)
+                val alreadyAt = selectedNames.indexOfFirst { it != null && it.equals(pickedRaw, ignoreCase = true) }
                 if (alreadyAt >= 0 && alreadyAt != index) {
                     // shouldn't happen because adapter disables these items, but guard anyway
                     Toast.makeText(this, "Name already used: $pickedRaw", Toast.LENGTH_SHORT).show()
@@ -250,11 +247,8 @@ class MainActivity : AppCompatActivity() {
                 // Recreate adapters so other seats show this selection as disabled
                 updateAutoCompleteAdapter()
 
-                // Reveal the next seat but do NOT auto-focus it
-                seats.getOrNull(index + 1)?.let { next ->
-                    val parentView = next.parent as? View
-                    parentView?.visibility = View.VISIBLE
-                }
+                // Reveal the next seat row but do NOT auto-focus it
+                seatRows.getOrNull(index + 1)?.visibility = View.VISIBLE
 
                 seat.clearFocus()
                 seat.dismissDropDown()

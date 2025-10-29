@@ -27,158 +27,318 @@
             <!-- Header removed to keep UI compact; start with the first dropdown -->
 
             <!-- Create 8 exposed dropdowns -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seat 1"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/row_seat1">
 
-                <AutoCompleteTextView
-                    android:id="@+id/seat1"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:text="Seat 1"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#88000000"
-                    android:background="@drawable/autocomplete_bg"
-                    android:popupBackground="@drawable/autocomplete_bg" />
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Name">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/seat1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#88000000"
+                        android:background="@drawable/autocomplete_bg"
+                        android:popupBackground="@drawable/autocomplete_bg" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
             <!-- Seats 2..8 -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seat 2"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/row_seat2">
 
-                <AutoCompleteTextView
-                    android:id="@+id/seat2"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:text="Seat 2"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#88000000"
-                    android:background="@drawable/autocomplete_bg"
-                    android:popupBackground="@drawable/autocomplete_bg" />
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Name">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <AutoCompleteTextView
+                        android:id="@+id/seat2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#88000000"
+                        android:background="@drawable/autocomplete_bg"
+                        android:popupBackground="@drawable/autocomplete_bg" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seat 3"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/row_seat3">
 
-                <AutoCompleteTextView
-                    android:id="@+id/seat3"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:text="Seat 3"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#88000000"
-                    android:background="@drawable/autocomplete_bg"
-                    android:popupBackground="@drawable/autocomplete_bg" />
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Name">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <AutoCompleteTextView
+                        android:id="@+id/seat3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#88000000"
+                        android:background="@drawable/autocomplete_bg"
+                        android:popupBackground="@drawable/autocomplete_bg" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seat 4"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/row_seat4">
 
-                <AutoCompleteTextView
-                    android:id="@+id/seat4"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:text="Seat 4"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#88000000"
-                    android:background="@drawable/autocomplete_bg"
-                    android:popupBackground="@drawable/autocomplete_bg" />
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Name">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <AutoCompleteTextView
+                        android:id="@+id/seat4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#88000000"
+                        android:background="@drawable/autocomplete_bg"
+                        android:popupBackground="@drawable/autocomplete_bg" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seat 5"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/row_seat5">
 
-                <AutoCompleteTextView
-                    android:id="@+id/seat5"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:text="Seat 5"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#88000000"
-                    android:background="@drawable/autocomplete_bg"
-                    android:popupBackground="@drawable/autocomplete_bg" />
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Name">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <AutoCompleteTextView
+                        android:id="@+id/seat5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#88000000"
+                        android:background="@drawable/autocomplete_bg"
+                        android:popupBackground="@drawable/autocomplete_bg" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seat 6"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/row_seat6">
 
-                <AutoCompleteTextView
-                    android:id="@+id/seat6"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:text="Seat 6"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#88000000"
-                    android:background="@drawable/autocomplete_bg"
-                    android:popupBackground="@drawable/autocomplete_bg" />
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Name">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <AutoCompleteTextView
+                        android:id="@+id/seat6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#88000000"
+                        android:background="@drawable/autocomplete_bg"
+                        android:popupBackground="@drawable/autocomplete_bg" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seat 7"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/row_seat7">
 
-                <AutoCompleteTextView
-                    android:id="@+id/seat7"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:text="Seat 7"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#88000000"
-                    android:background="@drawable/autocomplete_bg"
-                    android:popupBackground="@drawable/autocomplete_bg" />
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Name">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <AutoCompleteTextView
+                        android:id="@+id/seat7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#88000000"
+                        android:background="@drawable/autocomplete_bg"
+                        android:popupBackground="@drawable/autocomplete_bg" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Seat 8"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/row_seat8">
 
-                <AutoCompleteTextView
-                    android:id="@+id/seat8"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:text="Seat 8"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"
-                    android:textColorHint="#88000000"
-                    android:background="@drawable/autocomplete_bg"
-                    android:popupBackground="@drawable/autocomplete_bg" />
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Name">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/seat8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#88000000"
+                        android:background="@drawable/autocomplete_bg"
+                        android:popupBackground="@drawable/autocomplete_bg" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
